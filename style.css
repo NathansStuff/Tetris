@@ -1,6 +1,35 @@
 * {
     margin: 0;
+    background-color: var(--grey);
 }
+
+:root {
+    --unit-width: 20px;
+    --unit-height: 20px;
+    --snow: #FCF7F8;
+    --grey: #CED3DC;
+    --wild-blue: #ABA9C3;
+    --denim: #275DAD;
+    --light-black: #5B616A;
+}
+
+.container {
+    display: flex;
+    width: calc(var(--unit-width)*20);
+    height: calc(var(--unit-height)*20);
+    margin: 100px auto;
+    justify-content: space-between;
+    background-color: ;
+}
+
 .grid {
-    background-color: #
+    background-color: var(--wild-blue);
+    width: calc(var(--unit-width)*10);
+    height: calc(var(--unit-height)*20);
+}
+
+.minigrid{
+    background-color: var(--light-black);
+    width: calc(var(--unit-width)*4);
+    height: calc(var(--unit-height)*4);
 }
