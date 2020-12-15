@@ -131,6 +131,8 @@ function getRandomTetromino() {
     currentTetromino = theTetrominoes[randomTetromino][randomNumber]
 }
 
+
+
 getRandomTetromino()
 let timerId = setInterval(gameLoop, 100) // in milliseconds
 getRandomTetromino()
@@ -140,3 +142,44 @@ function gameLoop() {
     checksIfTaken()
     draw()
 }
+
+function userInput(event) {
+    if(event.keyCode === 37) {
+      moveLeft()
+    } else if (event.keyCode === 38) {
+    //   rotate()
+    } else if (event.keyCode === 39) {
+      moveRight()
+    } else if (event.keyCode === 40) {
+    //   moveDown()
+    }
+  }
+
+document.addEventListener('keyup', userInput)
+
+function moveLeft() {
+    undraw()
+    const isAtLeftEdge = currentTetromino.some(index => (currentPosition + index) % width === 0)
+    if(!isAtLeftEdge) currentPosition -=1
+    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+      currentPosition +=1
+    }
+    draw()
+  }
+
+  function moveRight() {
+    undraw()
+    const isAtRightEdge = currentTetromino.some(index => (currentPosition + index) % width === width -1)
+    if(!isAtRightEdge) currentPosition +=1
+    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+      currentPosition -=1
+    }
+    draw()
+  }
+
+
+
+
+
+
+//   New tet is never a long line!!!
