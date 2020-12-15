@@ -27,12 +27,17 @@
     height: calc(var(--unit-height)*20);
     display: flex;
     flex-wrap: wrap;
+    overflow: hidden;
 }
 
 .grid div {
     background-color: var(--wild-blue);
     width: calc(var(--unit-width));
     height: calc(var(--unit-height));
+}
+
+.grid div.taken {
+    background-color: var(--light-black);
 }
 
 .grid .active {

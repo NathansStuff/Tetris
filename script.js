@@ -38,29 +38,59 @@ const iTetromino = [
   ]
 
 const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+let randomTetromino
+let randomNumber
+const startingPostion = 4
+let currentPosition = startingPostion
+let currentTetromino
 
-let currentTetromino = theTetrominoes[0][0]
-
-let currentPostition = 4
-
+function getRandomTetromino() {
+    randomTetromino = Math.floor(Math.random()*theTetrominoes.length)
+    randomNumber = Math.floor(Math.random()*theTetrominoes[randomTetromino].length)
+    currentTetromino = theTetrominoes[randomTetromino][randomNumber]
+}
 
 function draw() {
     currentTetromino.forEach(index => {
-        squares[currentPostition + index].classList.add('active')
+        squares[currentPosition + index].classList.add('active')
     })
 }
 
 
 function undraw() {
     currentTetromino.forEach(index => {
-        squares[currentPostition + index].classList.remove('active')
+        squares[currentPosition + index].classList.remove('active')
     })
 }
 
-timerId = window.setInterval(gameLoop, 500) // in milliseconds
+function checksIfTaken() {
+    // checks square one spot down
+    if(currentTetromino.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+        currentTetromino.forEach(index => squares[currentPosition + index].classList.add('taken'))
 
+        // start a new tetromino
+        getRandomTetromino()
+        // Checks game over
+        if (squares[startingPostion].classList.contains('taken')) { 
+            console.log('Game Over')
+            window.clearInterval(timerId) // Stop the gameLoop timer
+        } else {
+            currentPosition = startingPostion
+        }
+    } else {
+        currentPosition += width
+    }
+}
+
+
+getRandomTetromino()
+let timerId = window.setInterval(gameLoop, 100) // in milliseconds
 function gameLoop() {
     undraw()
-    currentPostition += width
+    checksIfTaken()
     draw()
+}
+
+function determineNextTetromino() {
+
 }
