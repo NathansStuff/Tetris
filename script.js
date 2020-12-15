@@ -43,12 +43,6 @@ const startingPostion = 4
 let currentPosition = startingPostion
 let currentTetromino
 
-function getRandomTetromino() {
-    randomTetromino = Math.floor(Math.random()*theTetrominoes.length)
-    randomNumber = Math.floor(Math.random()*theTetrominoes[randomTetromino].length)
-    currentTetromino = theTetrominoes[randomTetromino][randomNumber]
-}
-
 function draw() {
     currentTetromino.forEach(index => {
         squares[currentPosition + index].classList.add('active')
@@ -86,13 +80,6 @@ function checksIfTaken() {
 }
 
 
-getRandomTetromino()
-let timerId = setInterval(gameLoop, 100) // in milliseconds
-function gameLoop() {
-    undraw()
-    checksIfTaken()
-    draw()
-}
 
 // Display squares to show next tetromino
 const displaySquares = Array.from(document.querySelectorAll('.minigrid div'))
@@ -124,4 +111,32 @@ function undrawNextTotromino() {
     nextTetromino.forEach(index => {
         displaySquares[index + displayIndex].classList.remove('active')
     })
+}
+
+
+function getRandomTetromino() {
+    
+    if(nextTetromino==displayTetrominos[0]) {
+        randomTetromino = 0
+    } else if(nextTetromino==displayTetrominos[1]) {
+        randomTetromino = 1
+    } else if(nextTetromino==displayTetrominos[2]){
+        randomTetromino = 2
+    } else if(nextTetromino==displayTetrominos[3]) {
+        randomTetromino = 3
+    } else {
+        nextTetromino = displayTetrominos[4]
+    }
+    randomNumber = Math.floor(Math.random()*theTetrominoes[randomTetromino].length)
+    currentTetromino = theTetrominoes[randomTetromino][randomNumber]
+}
+
+getRandomTetromino()
+let timerId = setInterval(gameLoop, 100) // in milliseconds
+getRandomTetromino()
+drawNextTetromino()
+function gameLoop() {
+    undraw()
+    checksIfTaken()
+    draw()
 }
