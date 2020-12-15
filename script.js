@@ -45,10 +45,22 @@ let currentPostition = 4
 
 
 function draw() {
-    console.log(squares)
     currentTetromino.forEach(index => {
         squares[currentPostition + index].classList.add('active')
     })
 }
 
-draw()
+
+function undraw() {
+    currentTetromino.forEach(index => {
+        squares[currentPostition + index].classList.remove('active')
+    })
+}
+
+timerId = window.setInterval(gameLoop, 500) // in milliseconds
+
+function gameLoop() {
+    undraw()
+    currentPostition += width
+    draw()
+}
