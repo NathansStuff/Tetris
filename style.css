@@ -19,17 +19,35 @@
     height: calc(var(--unit-height)*20);
     margin: 100px auto;
     justify-content: space-between;
-    background-color: ;
+
 }
 
 .grid {
-    background-color: var(--wild-blue);
     width: calc(var(--unit-width)*10);
     height: calc(var(--unit-height)*20);
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.minigrid{
-    background-color: var(--light-black);
+.grid div {
+    background-color: var(--wild-blue);
+    width: calc(var(--unit-width));
+    height: calc(var(--unit-height));
+}
+
+.grid .active {
+    background-color: var(--denim);
+}
+
+.minigrid {
     width: calc(var(--unit-width)*4);
     height: calc(var(--unit-height)*4);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.minigrid div {
+    background-color: var(--light-black);
+    width: calc(var(--unit-width));
+    height: calc(var(--unit-height));
 }
