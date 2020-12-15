@@ -40,6 +40,7 @@
     background-color: var(--light-black);
 }
 
+.minigrid .active,
 .grid .active {
     background-color: var(--denim);
 }
