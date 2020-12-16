@@ -1,4 +1,4 @@
-const grid = document.querySelector('grid')
+const grid = document.querySelector('.grid')
 let squares = Array.from(document.querySelectorAll('.grid div'))
 const width = 10
 //The Tetrominoes
@@ -202,18 +202,33 @@ function rotate() {
     // undraw()
     draw()
 }
-
+ 
 function checksIfRowComplete() {
     for (let i = 0; i < 199; i+=width) { //sho20,etculd start loops at 0,10,
         const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9] //should check 0-9,10-19,etc
-        // console.log(`${row}**************`)
         if (row.every(index => squares[index].classList.contains('taken'))) {
-            row.forEach(index => squares[index].classList.remove('taken'))
+            row.forEach(index => {
+                squares[index].classList.remove('taken')
+            })
+            const squaresRemoved = squares.splice(i, width) // remove the squares from the array
+            squares = squaresRemoved.concat(squares) // add the squares to the array
             
-            // deleteStuff()
-            squares.splice(row[0],width)
-            squares.unshift('div')
-            console.log(squaresRemoved)
+            console.log(squares)
+            console.log
+            squares.forEach(cell => grid.appendChild(cell)) // add array to html
+    
+    
+    
+    
+    
+    
+    
+            // row.forEach(index => squares[index].classList.remove('taken'))
+            
+            // // deleteStuff()
+            // squares.splice(row[0],width)
+            // squares.unshift('div')
+            // console.log(squaresRemoved)
 
             // saved = squares.splice(row[0],10)
             // squares.prepend(saved)
@@ -228,11 +243,6 @@ function checksIfRowComplete() {
         }
     }
 }
-
-function deleteStuff() {
-    grid.remove(190,10)
-}
-
 
 
 // //   New tet is never a long line!!!
