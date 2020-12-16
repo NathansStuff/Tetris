@@ -208,16 +208,30 @@ function checksIfRowComplete() {
         const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9] //should check 0-9,10-19,etc
         // console.log(`${row}**************`)
         if (row.every(index => squares[index].classList.contains('taken'))) {
+            row.forEach(index => squares[index].classList.remove('taken'))
+            
+            // deleteStuff()
+            squares.splice(row[0],width)
+            squares.unshift('div')
+            console.log(squaresRemoved)
+
+            // saved = squares.splice(row[0],10)
+            // squares.prepend(saved)
+            
             // squares = squares.splice(row[0],10)
+
             // var newdiv = document.createElement('div')
             // newdiv.style.background = 'red'
-            // newdiv.style.height = '1000px';
-            // document.grid.appendChild(newdiv)
+            // newdiv.innerHTML = 'MMEEE';
+            // document.grid.insertBefore(newdiv,grid)
 
         }
     }
 }
 
+function deleteStuff() {
+    grid.remove(190,10)
+}
 
 
 

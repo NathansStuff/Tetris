@@ -28,6 +28,7 @@
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
+    background-color: yellow;
 }
 
 .grid div {
@@ -58,7 +59,3 @@
     height: calc(var(--unit-height));
 }
 
-
-.new {
-    background-color: yellow;
-}
