@@ -1,5 +1,5 @@
 const grid = document.querySelector('grid')
-const squares = Array.from(document.querySelectorAll('.grid div'))
+let squares = Array.from(document.querySelectorAll('.grid div'))
 const width = 10
 //The Tetrominoes
 const lTetromino = [
@@ -72,6 +72,7 @@ function checksIfTaken() {
             console.log('Game Over')
             clearInterval(timerId) // Stop the gameLoop timer
         } else {
+            checksIfRowComplete()
             currentPosition = startingPostion
         }
     } else {
@@ -134,12 +135,13 @@ function getRandomTetromino() {
 
 
 getRandomTetromino()
-let timerId = setInterval(gameLoop, 100) // in milliseconds
-getRandomTetromino()
 drawNextTetromino()
+let timerId = setInterval(gameLoop, 500) // in milliseconds
+draw()
 function gameLoop() {
     undraw()
     checksIfTaken()
+    // checksIfRowComplete()
     draw()
 }
 
@@ -147,11 +149,11 @@ function userInput(event) {
     if(event.keyCode === 37) {
       moveLeft()
     } else if (event.keyCode === 38) {
-    //   rotate()
+      rotate()
     } else if (event.keyCode === 39) {
       moveRight()
     } else if (event.keyCode === 40) {
-    //   moveDown()
+      moveDown()
     }
   }
 
@@ -175,11 +177,49 @@ function moveLeft() {
       currentPosition -=1
     }
     draw()
-  }
+}
+
+function moveDown() {
+    undraw()
+    currentPosition +=10
+    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        currentPosition -=10
+    }
+    draw()
+}
+
+function rotate() {
+    undraw()
+    console.log(currentTetromino)
+    // currentTetromino = transpose(currentTetromino)
+    // console.log(currentTetromino)
+    // draw()
+    randomNumber+=1
+    if (randomNumber > (theTetrominoes[randomTetromino].length -1)) {
+        randomNumber = 0
+    }
+    currentTetromino = theTetrominoes[randomTetromino][randomNumber]
+    // undraw()
+    draw()
+}
+
+function checksIfRowComplete() {
+    for (let i = 0; i < 199; i+=width) { //sho20,etculd start loops at 0,10,
+        const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9] //should check 0-9,10-19,etc
+        // console.log(`${row}**************`)
+        if (row.every(index => squares[index].classList.contains('taken'))) {
+            // squares = squares.splice(row[0],10)
+            // var newdiv = document.createElement('div')
+            // newdiv.style.background = 'red'
+            // newdiv.style.height = '1000px';
+            // document.grid.appendChild(newdiv)
+
+        }
+    }
+}
 
 
 
 
-
-
-//   New tet is never a long line!!!
+// //   New tet is never a long line!!!
+// // Rotation at the edge of the map

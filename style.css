@@ -57,3 +57,8 @@
     width: calc(var(--unit-width));
     height: calc(var(--unit-height));
 }
+
+
+.new {
+    background-color: yellow;
+}
